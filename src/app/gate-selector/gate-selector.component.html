@@ -1,17 +1,9 @@
 Select a Gate!
-<div class="card" style="width: 18rem;">
-  <ul class="list-group list-group-flush">
-    <li class="list-group-item" *ngFor="let gate of gateList" 
-      [class.active]="gate === selectedGate" 
-      (click)="selectedGate = gate">
-        {{gate}}
-    </li>
-  </ul>
-  <div *ngIf="selectedGate">
-    Selected gate is: {{selectedGate}}
-    <div>
-      <app-gate [gate]="selectedGate"></app-gate>
-    </div>
-
-  </div>
-</div>
+<mat-card class="gate-selector">
+  <mat-radio-group [(ngModel)]="selectedGate">
+    <mat-radio-button [value]="gate" *ngFor="let gate of gateList">
+      {{gate}}
+    </mat-radio-button>
+  </mat-radio-group>
+</mat-card>
+<app-gate [gate]="selectedGate" *ngIf="selectedGate"></app-gate>

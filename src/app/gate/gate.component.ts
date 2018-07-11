@@ -6,7 +6,7 @@ import { Component, OnInit, Input } from "@angular/core";
   styleUrls: ["./gate.component.scss"]
 })
 export class GateComponent implements OnInit {
-  @Input() gate;
+  @Input() gate: String;
   output: boolean;
   isClocked: boolean = false;
   A: boolean = false;

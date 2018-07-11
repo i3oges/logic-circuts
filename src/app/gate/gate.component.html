@@ -1,20 +1,15 @@
-<div class="container">
-  <div class="inputs">
-		<div>
-			<input type="checkbox" [(ngModel)]="isClocked" (change)="chooseGate()"> Clocked?
-		</div>
-		<div>
-			<input type="checkbox" [(ngModel)]="A" (change)="chooseGate()"> A
-		</div>
-		<div>
-			<input type="checkbox" [(ngModel)]="B" (change)="chooseGate()"> B
-		</div>
-
+<mat-card>
+	<mat-card-header>Selected gate is...</mat-card-header>
+	<mat-card-subtitle>{{gate}}</mat-card-subtitle>
+	<mat-card-content>
+		<mat-checkbox [(ngModel)]="isClocked" (change)="chooseGate()"> Clocked? </mat-checkbox>
+		<mat-checkbox [(ngModel)]="A" (change)="chooseGate()"> A </mat-checkbox>
+		<mat-checkbox [(ngModel)]="B" (change)="chooseGate()"> B </mat-checkbox>
 		<div *ngIf="isClocked">
-			<input type="checkbox" [(ngModel)]="C" (change)="chooseGate()"> C
+			<mat-checkbox [(ngModel)]="C" (change)="chooseGate()"> C</mat-checkbox>
 		</div>
-		<div>
-			output: {{output}}
-		</div>
-  </div>
-</div>
+	</mat-card-content>
+	<mat-card-actions>
+		 output: {{output}}
+	</mat-card-actions>
+</mat-card>
