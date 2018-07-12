@@ -1,18 +1,16 @@
-import { BrowserModule } from "@angular/platform-browser";
-import { NgModule } from "@angular/core";
-import { FormsModule } from "@angular/forms";
-import { AppComponent } from "./app.component";
-import { GateSelectorComponent } from "./gate-selector/gate-selector.component";
-import { GateComponent } from "./gate/gate.component";
-import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import { MatCheckboxModule } from "@angular/material/checkbox";
-import { MatRadioModule } from "@angular/material/radio";
-import { MatToolbarModule } from "@angular/material/toolbar";
-import { MatCardModule } from "@angular/material";
-import { MatCheckboxModule } from "@angular/material/checkbox";
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { AppComponent } from './app.component';
+import { GateSelectorComponent } from './gate-selector/gate-selector.component';
+import { GateComponent } from './gate/gate.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatChipsModule, MatCardModule, MatDividerModule, MatCheckboxModule, MatToolbarModule, MatRadioModule } from '@angular/material';
+import { TruthTableComponent } from './truth-table/truth-table.component';
+
 
 @NgModule({
-  declarations: [AppComponent, GateSelectorComponent, GateComponent],
+  declarations: [AppComponent, GateSelectorComponent, GateComponent, TruthTableComponent],
   imports: [
     BrowserModule,
     FormsModule,
@@ -21,7 +19,9 @@ import { MatCheckboxModule } from "@angular/material/checkbox";
     MatRadioModule,
     MatToolbarModule,
     MatCardModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatDividerModule,
+    MatChipsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

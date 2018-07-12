@@ -1,16 +1,15 @@
-import { Component, OnInit, Input } from "@angular/core";
+import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: "app-gate-selector",
-  templateUrl: "./gate-selector.component.html",
-  styleUrls: ["./gate-selector.component.scss"]
+  selector: 'app-gate-selector',
+  templateUrl: './gate-selector.component.html',
+  styleUrls: ['./gate-selector.component.scss']
 })
 export class GateSelectorComponent implements OnInit {
-  isClocked: boolean = false;
   selectedGate: string;
-  gateList: Array<string> = ["AND", "OR", "NAND", "NOR", "XOR", "XNOR"];
+  gateList: Array<string> = ['AND', 'OR', 'NAND', 'NOR', 'XOR', 'XNOR'];
+  constructor() { }
 
-  constructor() {}
-
-  ngOnInit() {}
+  ngOnInit() {
+  }
 }

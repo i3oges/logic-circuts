@@ -1,15 +1,20 @@
-<mat-card>
-	<mat-card-header>Selected gate is...</mat-card-header>
-	<mat-card-subtitle>{{gate}}</mat-card-subtitle>
-	<mat-card-content>
-		<mat-checkbox [(ngModel)]="isClocked" (change)="chooseGate()"> Clocked? </mat-checkbox>
-		<mat-checkbox [(ngModel)]="A" (change)="chooseGate()"> A </mat-checkbox>
-		<mat-checkbox [(ngModel)]="B" (change)="chooseGate()"> B </mat-checkbox>
-		<div *ngIf="isClocked">
-			<mat-checkbox [(ngModel)]="C" (change)="chooseGate()"> C</mat-checkbox>
-		</div>
-	</mat-card-content>
-	<mat-card-actions>
-		 output: {{output}}
-	</mat-card-actions>
+<mat-card class="gate">
+  <mat-card-header>
+    <mat-card-title>Gate I/O</mat-card-title>
+    <mat-card-subtitle>{{gate}}</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-checkbox [(ngModel)]="isClocked" (change)="chooseGate()"> Clocked? </mat-checkbox>
+    <mat-checkbox [(ngModel)]="A" (change)="chooseGate()"> A </mat-checkbox>
+    <mat-checkbox [(ngModel)]="B" (change)="chooseGate()"> B </mat-checkbox>
+    <div *ngIf="isClocked">
+      <mat-checkbox [(ngModel)]="C" (change)="chooseGate()"> C</mat-checkbox>
+    </div>
+  </mat-card-content>
+  <mat-card-actions align="end">
+    <mat-chip-list>
+      <mat-chip color="primary" selected *ngIf="output">Positive</mat-chip>
+      <mat-chip color="warn" selected *ngIf="!output">Negative</mat-chip>
+    </mat-chip-list>
+  </mat-card-actions>
 </mat-card>

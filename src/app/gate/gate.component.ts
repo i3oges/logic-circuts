@@ -1,46 +1,47 @@
-import { Component, OnInit, Input } from "@angular/core";
+import { Component, OnInit, Input, OnChanges } from '@angular/core';
 
 @Component({
-  selector: "app-gate",
-  templateUrl: "./gate.component.html",
-  styleUrls: ["./gate.component.scss"]
+  selector: 'app-gate',
+  templateUrl: './gate.component.html',
+  styleUrls: ['./gate.component.scss']
 })
-export class GateComponent implements OnInit {
+export class GateComponent implements OnInit, OnChanges {
   @Input() gate: String;
   output: boolean;
-  isClocked: boolean = false;
-  A: boolean = false;
-  B: boolean = false;
-  C: boolean = false;
-  R: boolean = false;
-  S: boolean = false;
+  isClocked = false;
+  A = false;
+  B = false;
+  C = false;
+  R = false;
+  S = false;
 
-  constructor() {}
-
+  constructor() { }
+  ngOnChanges(changes): void {
+    this.chooseGate();
+  }
   ngOnInit() {
     this.chooseGate();
   }
 
   chooseGate(): void {
-    console.log(`${this.A} ${this.B} ${this.C} ${this.isClocked}`);
     if ((this.isClocked && this.C) || (!this.isClocked && !this.C)) {
       switch (this.gate) {
-        case "AND":
+        case 'AND':
           this.output = this.A && this.B;
           break;
-        case "OR":
+        case 'OR':
           this.output = this.A || this.B;
           break;
-        case "NAND":
+        case 'NAND':
           this.output = !(this.A && this.B);
           break;
-        case "NOR":
+        case 'NOR':
           this.output = !(this.A || this.B);
           break;
-        case "XOR":
+        case 'XOR':
           this.output = (this.A && !this.B) || (!this.A && this.B);
           break;
-        case "XNOR":
+        case 'XNOR':
           this.output = !((this.A && !this.B) || (!this.A && this.B));
           break;
         default:
