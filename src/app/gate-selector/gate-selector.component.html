@@ -6,11 +6,11 @@
   </mat-card-header>
   <mat-card-content>
     <mat-radio-group [(ngModel)]="selectedGate">
-      <mat-radio-button [value]="gate" *ngFor="let gate of gateList">
-        {{gate}}
+      <mat-radio-button [value]="type" *ngFor="let type of gateList">
+        {{type}}
       </mat-radio-button>
     </mat-radio-group>
   </mat-card-content>
 </mat-card>
-<app-gate [gate]="selectedGate" *ngIf="selectedGate"></app-gate>
-<app-truth-table [gate]="selectedGate" *ngIf="selectedGate"></app-truth-table>
+<app-gate [type]="selectedGate" *ngIf="selectedGate"></app-gate>
+<app-truth-table [type]="selectedGate" *ngIf="selectedGate"></app-truth-table>

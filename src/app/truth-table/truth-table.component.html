@@ -1,6 +1,23 @@
 <mat-card class="truth-table">
   <mat-card-header>
     <mat-card-title>Truth Table</mat-card-title>
-    <mat-card-subtitle>{{ gate }}</mat-card-subtitle>
+    <mat-card-subtitle>{{ type }}</mat-card-subtitle>
   </mat-card-header>
+  <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+    <ng-container matColumnDef="A">
+      <mat-header-cell *matHeaderCellDef > A </mat-header-cell>
+      <mat-cell *matCellDef="let input"> {{input.a}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="B">
+      <mat-header-cell *matHeaderCellDef > B </mat-header-cell>
+      <mat-cell *matCellDef="let input"> {{input.b}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="X">
+      <mat-header-cell *matHeaderCellDef > X </mat-header-cell>
+      <mat-cell *matCellDef="let input"> {{input.x}} </mat-cell>
+    </ng-container>
+  
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let input; columns: displayedColumns;"></mat-row>
+  </mat-table>
 </mat-card>

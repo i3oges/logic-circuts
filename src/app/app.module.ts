@@ -5,9 +5,16 @@ import { AppComponent } from './app.component';
 import { GateSelectorComponent } from './gate-selector/gate-selector.component';
 import { GateComponent } from './gate/gate.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatChipsModule, MatCardModule, MatDividerModule, MatCheckboxModule, MatToolbarModule, MatRadioModule } from '@angular/material';
+import { MatChipsModule,
+  MatCardModule,
+  MatDividerModule,
+  MatCheckboxModule,
+  MatToolbarModule,
+  MatRadioModule,
+  MatGridListModule,
+  MatTableModule
+} from '@angular/material';
 import { TruthTableComponent } from './truth-table/truth-table.component';
-
 
 @NgModule({
   declarations: [AppComponent, GateSelectorComponent, GateComponent, TruthTableComponent],
@@ -21,9 +28,11 @@ import { TruthTableComponent } from './truth-table/truth-table.component';
     MatCardModule,
     MatCheckboxModule,
     MatDividerModule,
-    MatChipsModule
+    MatChipsModule,
+    MatGridListModule,
+    MatTableModule
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }

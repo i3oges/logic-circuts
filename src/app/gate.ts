@@ -1,32 +1,40 @@
 export class Gate {
   type: string;
-  result: boolean;
-  constructor(type: string, a: boolean, b: boolean) {
+  constructor(type: string) {
     this.type = type;
   }
-  evaluate(a, b): boolean {
-    switch (this.type) {
-      case 'AND':
-        this.result = a && b;
-        break;
-      case 'OR':
-        this.result = a || b;
-        break;
-      case 'NAND':
-        this.result = !(a && b);
-        break;
-      case 'NOR':
-        this.result = !(a || b);
-        break;
-      case 'XOR':
-        this.result = (a && !b) || (!a && b);
-        break;
-      case 'XNOR':
-        this.result = !((a && !b) || (!a && b));
-        break;
-      default:
-        this.result = false;
+  evaluate(a: boolean, b: boolean, c: boolean, isClocked: boolean): boolean {
+    let result: boolean;
+    // clock value is set, AND isClocked
+    // clock value isn't set AND isn't isClocked
+    if ((c && isClocked) || (!c && !isClocked)) {
+      switch (this.type) {
+        case 'AND':
+          result = a && b;
+          break;
+        case 'OR':
+          result = a || b;
+          break;
+        case 'NAND':
+          result = !(a && b);
+          break;
+        case 'NOR':
+          result = !(a || b);
+          break;
+        case 'XOR':
+          result = (a && !b) || (!a && b);
+          break;
+        case 'XNOR':
+          result = !((a && !b) || (!a && b));
+          break;
+        default:
+          result = false;
+      }
+    // clock value is not set AND isClocked
+    } else if (isClocked && !c) {
+      result = false;
     }
-    return this.result;
+
+    return result;
   }
 }

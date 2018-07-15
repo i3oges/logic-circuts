@@ -1,14 +1,14 @@
 <mat-card class="gate">
   <mat-card-header>
     <mat-card-title>Gate I/O</mat-card-title>
-    <mat-card-subtitle>{{gate}}</mat-card-subtitle>
+    <mat-card-subtitle>{{type}}</mat-card-subtitle>
   </mat-card-header>
   <mat-card-content>
     <mat-checkbox [(ngModel)]="isClocked" (change)="chooseGate()"> Clocked? </mat-checkbox>
     <mat-checkbox [(ngModel)]="A" (change)="chooseGate()"> A </mat-checkbox>
     <mat-checkbox [(ngModel)]="B" (change)="chooseGate()"> B </mat-checkbox>
     <div *ngIf="isClocked">
-      <mat-checkbox [(ngModel)]="C" (change)="chooseGate()"> C</mat-checkbox>
+      <mat-checkbox [(ngModel)]="C" (change)="chooseGate()"> C </mat-checkbox>
     </div>
   </mat-card-content>
   <mat-card-actions align="end">
