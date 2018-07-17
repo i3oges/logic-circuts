@@ -7,29 +7,48 @@ import { Gate } from '../gate';
   styleUrls: ['./gate.component.scss']
 })
 export class GateComponent implements OnInit, OnChanges {
-  @Input() type: string;
-  gate: Gate;
+  @Input() gate: Gate;
   output: boolean;
   isClocked = false;
-  A = false;
-  B = false;
-  C = false;
+
+  // TODO app doesn't update when new gate is selected until an input is selected
+
+  // TODO make this work
+  // variable amount of inputs based on inputAmt, later to be updated in UI
+  inputAmt = 3;
+
+  intInput = [];
+  inputs = [];
+
+  clock = false;
 
   constructor() {
+
   }
   ngOnChanges(): void {
-    this.gate = new Gate(this.type);
+    // empty array with set number of inputs equal to inputAmt to be referenced in html
+    // ex [0,0,0]
+    this.intInput = this.gate.maxInputs.slice(0, this.inputAmt).map(function (i) {
+      return 0;
+    });
+    // create inputs string
+    // ex ['A', 'B', 'C']
+    this.inputs = this.gate.maxInputs.slice(0, this.inputAmt);
     this.chooseGate();
   }
   ngOnInit() {
-    this.gate = new Gate(this.type);
-    this.chooseGate();
+
   }
 
   chooseGate(): void {
     if (!this.isClocked) {
-      this.C = false;
+      this.clock = false;
     }
-    this.output = this.gate.evaluate(this.A, this.B, this.C, this.isClocked);
+    // cast the true/false value as in integer
+    this.intInput.map(function (i) {
+      return +i;
+    });
+
+    this.output = this.gate.evaluate(this.intInput, this.isClocked, this.clock);
   }
 }

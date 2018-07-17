@@ -1,86 +1,94 @@
-interface TruthTable {
-  a: number[];
-  b: number[];
-  x: number[];
-}
-
+/**
+ * Truth table AND gate example (2 inputs)
+ * A | B | X
+ * 0 | 0 | 0
+ * 1 | 0 | 0
+ * 0 | 1 | 0
+ * 1 | 1 | 1
+ *
+ * inputs are a 2 dimensional array like this
+ * [
+ *  [0,0],
+ *  [1,0],
+ *  [0,1],
+ *  [1,1]
+ * ]
+ */
 export class Gate {
   type: string;
-  truthTable: any[] = [];
-  truthTableInputs: TruthTable[] = [];
-  constructor(type: string) {
+  truthTable = [];
+  maxInputs = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L'];
+  inputCount = 0;
+  constructor() { }
+
+  setGateType(type) {
     this.type = type;
   }
-  evaluate(a: boolean, b: boolean, c: boolean, isClocked: boolean): boolean {
-    let result: boolean;
+
+  evaluate(input: number[], isClocked, clockInput): boolean {
+    this.inputCount = input.length;
+    let result = false;
+
+    // sum of values from the input array
+    // ex. [0, 1, 1, 0] = 2
+    const inputSum = input.reduce(function(total, value) {
+      return total + value;
+    });
+
     // clock value is set, AND isClocked
     // clock value isn't set AND isn't isClocked
-    if ((c && isClocked) || (!c && !isClocked)) {
+    if ((clockInput && isClocked) || (!clockInput && !isClocked)) {
       switch (this.type) {
-        case 'AND':
-          result = a && b;
+        case 'AND': // values should total to the length of the input array
+          result = inputSum === input.length;
           break;
-        case 'OR':
-          result = a || b;
+        case 'OR': // values should total to greater than 0
+          result = inputSum > 0;
           break;
-        case 'NAND':
-          result = !(a && b);
+        case 'NAND': // values should total to than the length of the input array
+          result = inputSum < input.length;
           break;
-        case 'NOR':
-          result = !(a || b);
+        case 'NOR': // values should total to zero
+          result = inputSum === 0;
           break;
-        case 'XOR':
-          result = (a && !b) || (!a && b);
+        case 'XOR': // values should total to be 1
+          result = inputSum === 1;
           break;
-        case 'XNOR':
-          result = !((a && !b) || (!a && b));
+        case 'XNOR': // values should total to be either 0 or the length of the inputs array
+          result = inputSum === 0 || inputSum === input.length;
           break;
         default:
           result = false;
       }
-    // clock value is not set AND isClocked
-    } else if (isClocked && !c) {
+      // clock value is not set AND isClocked
+    } else if (isClocked && !clockInput) {
       result = false;
     }
-
     return result;
   }
-  generateTruthTable(inputs) {
-    this.truthTableInputs = [];
-    this.truthTable = [];
-    const inputArr: any[] = [];
-    /**
-     * Truth table AND gate example (2 inputs)
-     * A | B | X
-     * 0 | 0 | 0
-     * 1 | 0 | 0
-     * 0 | 1 | 0
-     * 1 | 1 | 1
-     *
-     * inputs are a 2 dimensional array like this
-     * [
-     *  [0,0],
-     *  [1,0],
-     *  [0,1],
-     *  [1,1]
-     * ]
-     */
-    this.getTruthTableInputs(inputArr, inputs);
-    this.generateTruthTableResult();
+
+
+  generateTruthTable(inputs): void {
+    const truthTableInputs: number[] = [];
+    const inputArr: number[] = [];
+
+    this.getTruthTableInputs(inputArr, inputs, truthTableInputs);
+    this.generateTruthTableResult(truthTableInputs);
   }
 
   /**
    * loop from 1 to 0 through as many inputs as needed
    *
    * @param inputArr empty array
+   * @param inputs number amount of inputs
    */
-  getTruthTableInputs(inputArr, inputs) {
+  getTruthTableInputs(inputArr, inputs, truthTableInputs): void {
     for (let i = 0; i < 2; i++) {
       inputArr.push(i);
       if (inputArr.length < inputs) {
-        this.getTruthTableInputs(inputArr, inputs);
+        this.getTruthTableInputs(inputArr, inputs, truthTableInputs);
       } else {
-        this.truthTableInputs.push(inputArr.slice(-inputs));
+        truthTableInputs.push(inputArr.slice(-inputs));
         inputArr.pop();
       }
     }
@@ -91,16 +99,34 @@ export class Gate {
    * Sort truth table inputs, assign to
    * truth table with X value as the evaluated result
    */
-  generateTruthTableResult() {
-    this.truthTableInputs.sort();
-    const gate = new Gate(this.type);
-    for (const inputs of this.truthTableInputs) {
-      this.truthTable.push({
-        a: inputs[0],
-        b: inputs[1],
-        x: + gate.evaluate(inputs[0], inputs[1], null, null)
-      });
+  generateTruthTableResult(truthTableInputs): void {
+
+    // convert all letters to lower case (used in variables)
+    // ex ['A', 'B', 'C'] = ['a', 'b', 'c']
+    const inputLetters = this.maxInputs.map(function(letter) {
+      return letter.toLowerCase();
+    });
+
+    let singleInputs = {};
+    let input: number;
+    // clear truth table values;
+    this.truthTable = [];
+    truthTableInputs.sort();
+
+    // loop through each set of inputs
+    for (const inputs of truthTableInputs) {
+      singleInputs = {};
+
+      // loop through each individual input, assign it a letter and the input value
+      for (let index = 0; index < inputs.length; index++) {
+        input = inputs[index];
+        singleInputs[inputLetters[index]] = input;
+      }
+
+      // add the evaluated output value
+      singleInputs['x'] = + this.evaluate(inputs, null, null);
+      this.truthTable.push(singleInputs);
     }
+    this.truthTable.sort();
   }
 }
-

@@ -9,19 +9,21 @@ import { Gate } from '../gate';
 export class TruthTableComponent implements OnInit, OnChanges {
   @Input() type: string;
   dataSource;
-  inputs = 2;
-  displayedColumns = ['A', 'B', 'X'];
+  inputs = 2; // TODO dynamically updated based on
+  displayedColumns = ['A', 'B', 'X']; // base value
+  gate = new Gate();
+  possibleColumns = this.gate.maxInputs;
   constructor() { }
 
-  ngOnInit() {
-    const gate = new Gate(this.type);
-    gate.generateTruthTable(this.inputs);
-    this.dataSource = gate.truthTable;
-  }
+  ngOnInit() { }
 
   ngOnChanges() {
-    const gate = new Gate(this.type);
-    gate.generateTruthTable(this.inputs);
-    this.dataSource = gate.truthTable;
+    this.gate.setGateType(this.type);
+    this.gate.generateTruthTable(this.inputs);
+
+    // update displayed columns to match input
+    this.displayedColumns = this.possibleColumns.slice(0, this.inputs);
+    this.displayedColumns.push('X');
+    this.dataSource = this.gate.truthTable;
   }
 }
