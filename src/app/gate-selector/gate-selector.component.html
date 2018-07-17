@@ -12,6 +12,5 @@
     </mat-radio-group>
   </mat-card-content>
 </mat-card>
-<app-test [gate]="gate" ></app-test>
 <app-gate [gate]="gate" *ngIf="selectedGate"></app-gate>
 <app-truth-table [type]="selectedGate" *ngIf="selectedGate"></app-truth-table>
