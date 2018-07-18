@@ -12,8 +12,9 @@
       <mat-checkbox [(ngModel)]="clock" (change)="chooseGate()"> CLOCK </mat-checkbox>
     </div>
   </mat-card-content>
-  <mat-card-actions align="end">
+  <mat-card-actions>
     <mat-chip-list>
+      Output: 
       <mat-chip color="primary" selected *ngIf="output">Positive</mat-chip>
       <mat-chip color="warn" selected *ngIf="!output">Negative</mat-chip>
     </mat-chip-list>
