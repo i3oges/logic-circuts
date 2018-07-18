@@ -11,6 +11,11 @@
       </mat-radio-button>
     </mat-radio-group>
   </mat-card-content>
+  <mat-card-actions>
+    Inputs:
+    <button mat-mini-fab color="primary" (click)="updateInputs(1)">+</button>
+    <button mat-mini-fab color="accent" (click)="updateInputs(-1)" >-</button>
+  </mat-card-actions>
 </mat-card>
 <app-gate [gate]="gate" *ngIf="selectedGate"></app-gate>
-<app-truth-table [type]="selectedGate" *ngIf="selectedGate"></app-truth-table>
+<app-truth-table [gate]="gate" *ngIf="selectedGate"></app-truth-table>

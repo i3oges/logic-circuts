@@ -12,7 +12,8 @@ import { MatChipsModule,
   MatToolbarModule,
   MatRadioModule,
   MatGridListModule,
-  MatTableModule
+  MatTableModule,
+  MatButtonModule
 } from '@angular/material';
 import { TruthTableComponent } from './truth-table/truth-table.component';
 
@@ -30,7 +31,8 @@ import { TruthTableComponent } from './truth-table/truth-table.component';
     MatDividerModule,
     MatChipsModule,
     MatGridListModule,
-    MatTableModule
+    MatTableModule,
+    MatButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]

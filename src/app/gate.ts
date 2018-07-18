@@ -14,31 +14,90 @@
  *  [1,1]
  * ]
  */
+
 export class Gate {
-  type: string;
-  truthTable = [];
-  maxInputs = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L'];
-  inputCount = 0;
+  private _type: string;
+  private _clockInput: number;
+  private _isClocked: boolean;
+  private _truthTable = [];
+  private _maxInputs = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L'];
+  private _gateList = ['AND', 'OR', 'NAND', 'NOR', 'XOR', 'XNOR'];
+  private _inputCount = 0;
   constructor() { }
 
-  setGateType(type) {
-    this.type = type;
+  getGateList(): string[] {
+    return this._gateList;
+  }
+  getTruthTable() {
+    return this._truthTable;
+  }
+  getMaxInputs(): string[] {
+    return this._maxInputs;
   }
 
-  evaluate(input: number[], isClocked, clockInput): boolean {
-    this.inputCount = input.length;
+  /**
+   * set inputCount for gate
+   * @param inputCount number
+   */
+  setInputCount(inputCount) {
+    this._inputCount = inputCount;
+  }
+  getInputCount(): number {
+    return this._inputCount;
+  }
+
+  /**
+   * set type of gate
+   * AND, OR, NAND, NOR, XOR, XNOR
+   * @param type string
+   */
+  setGateType(type) {
+    this._type = type;
+  }
+  getGateType(): string {
+    return this._type;
+  }
+
+  /**
+   * sets clock input value
+   * 1 or 0
+   * @param clockInput number
+   */
+  setClockInput(clockInput) {
+    this._clockInput = clockInput;
+  }
+  getClockInput(): number {
+    return this._clockInput;
+  }
+
+  /**
+   * determines whether gate requires a clock value to pass
+   * @param isClocked boolean
+   */
+  setIsClocked(isClocked) {
+    this._isClocked = isClocked;
+  }
+  getIsClocked(): boolean {
+    return this._isClocked;
+  }
+
+  /**
+   * simulate the selected gate with provided input values
+   * @param input number[] - Simulated input voltages eg, [0,1,1,0]
+   */
+  evaluate(input: number[]): boolean {
     let result = false;
 
     // sum of values from the input array
     // ex. [0, 1, 1, 0] = 2
-    const inputSum = input.reduce(function(total, value) {
+    const inputSum = input.reduce(function (total, value) {
       return total + value;
     });
 
     // clock value is set, AND isClocked
     // clock value isn't set AND isn't isClocked
-    if ((clockInput && isClocked) || (!clockInput && !isClocked)) {
-      switch (this.type) {
+    if ((this._clockInput && this._isClocked) || (!this._clockInput && !this._isClocked)) {
+      switch (this._type) {
         case 'AND': // values should total to the length of the input array
           result = inputSum === input.length;
           break;
@@ -61,7 +120,7 @@ export class Gate {
           result = false;
       }
       // clock value is not set AND isClocked
-    } else if (isClocked && !clockInput) {
+    } else if (this._isClocked && !this._clockInput) {
       result = false;
     }
     return result;
@@ -103,16 +162,19 @@ export class Gate {
 
     // convert all letters to lower case (used in variables)
     // ex ['A', 'B', 'C'] = ['a', 'b', 'c']
-    const inputLetters = this.maxInputs.map(function(letter) {
+    const inputLetters = this._maxInputs.map(function (letter) {
       return letter.toLowerCase();
     });
 
     let singleInputs = {};
     let input: number;
     // clear truth table values;
-    this.truthTable = [];
+    this._truthTable = [];
     truthTableInputs.sort();
-
+    const prevClockValue = this._clockInput;
+    if (this._isClocked) {
+      this._clockInput = 1;
+    }
     // loop through each set of inputs
     for (const inputs of truthTableInputs) {
       singleInputs = {};
@@ -122,11 +184,11 @@ export class Gate {
         input = inputs[index];
         singleInputs[inputLetters[index]] = input;
       }
-
       // add the evaluated output value
-      singleInputs['x'] = + this.evaluate(inputs, null, null);
-      this.truthTable.push(singleInputs);
+      singleInputs['x'] = + this.evaluate(inputs);
+      this._truthTable.push(singleInputs);
     }
-    this.truthTable.sort();
+
+    this._truthTable.sort();
   }
 }
