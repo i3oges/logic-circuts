@@ -1,2 +1,4 @@
 <mat-toolbar color="primary">Logic Circuts</mat-toolbar>
-<app-gate-selector></app-gate-selector>
+<app-gate-selector (gateSelect)="onSelectGate($event)" (newInputs)="onUpdateInputs($event)"></app-gate-selector>
+<app-gate [gate]="gate" *ngIf="isGateSelected"></app-gate>
+<app-truth-table [gate]="gate" *ngIf="isGateSelected"></app-truth-table>

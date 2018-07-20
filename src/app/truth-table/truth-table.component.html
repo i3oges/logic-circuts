@@ -1,46 +1,46 @@
-<mat-card class="truth-table">
+<mat-card class="truth-table" flex>
   <mat-card-header>
     <mat-card-title>Truth Table</mat-card-title>
     <mat-card-subtitle>{{ _gate.getGateType() }}</mat-card-subtitle>
   </mat-card-header>
   <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
     <ng-container matColumnDef="A">
-      <mat-header-cell *matHeaderCellDef > A </mat-header-cell>
-      <mat-cell *matCellDef="let input"> {{input.a}} </mat-cell>
+      <mat-header-cell *matHeaderCellDef class="high"> A </mat-header-cell>
+      <mat-cell *matCellDef="let input" [class.high]="input.a"> {{input.a}} </mat-cell>
     </ng-container>
     <ng-container matColumnDef="B">
-      <mat-header-cell *matHeaderCellDef > B </mat-header-cell>
-      <mat-cell *matCellDef="let input"> {{input.b}} </mat-cell>
+      <mat-header-cell *matHeaderCellDef class="high" > B </mat-header-cell>
+      <mat-cell *matCellDef="let input" [class.high]="input.b"> {{input.b}} </mat-cell>
     </ng-container>
     <ng-container matColumnDef="C">
-      <mat-header-cell *matHeaderCellDef > C </mat-header-cell>
-      <mat-cell *matCellDef="let input"> {{input.c}} </mat-cell>
+      <mat-header-cell *matHeaderCellDef class="high" > C </mat-header-cell>
+      <mat-cell *matCellDef="let input" [class.high]="input.c"> {{input.c}} </mat-cell>
     </ng-container>
     <ng-container matColumnDef="D">
-      <mat-header-cell *matHeaderCellDef > D </mat-header-cell>
-      <mat-cell *matCellDef="let input"> {{input.d}} </mat-cell>
+      <mat-header-cell *matHeaderCellDef class="high" > D </mat-header-cell>
+      <mat-cell *matCellDef="let input" [class.high]="input.d"> {{input.d}} </mat-cell>
     </ng-container>
     <ng-container matColumnDef="E">
-      <mat-header-cell *matHeaderCellDef > E </mat-header-cell>
-      <mat-cell *matCellDef="let input"> {{input.e}} </mat-cell>
+      <mat-header-cell *matHeaderCellDef class="high" > E </mat-header-cell>
+      <mat-cell *matCellDef="let input" [class.high]="input.e"> {{input.e}} </mat-cell>
     </ng-container>
     <ng-container matColumnDef="F">
-      <mat-header-cell *matHeaderCellDef > F </mat-header-cell>
-      <mat-cell *matCellDef="let input"> {{input.f}} </mat-cell>
+      <mat-header-cell *matHeaderCellDef class="high" > F </mat-header-cell>
+      <mat-cell *matCellDef="let input" [class.high]="input.f"> {{input.f}} </mat-cell>
     </ng-container>
     <ng-container matColumnDef="G">
-      <mat-header-cell *matHeaderCellDef > G </mat-header-cell>
-      <mat-cell *matCellDef="let input"> {{input.g}} </mat-cell>
+      <mat-header-cell *matHeaderCellDef class="high" > G </mat-header-cell>
+      <mat-cell *matCellDef="let input" [class.high]="input.g"> {{input.g}} </mat-cell>
     </ng-container>
     <ng-container matColumnDef="H">
-      <mat-header-cell *matHeaderCellDef > H </mat-header-cell>
-      <mat-cell *matCellDef="let input"> {{input.h}} </mat-cell>
+      <mat-header-cell *matHeaderCellDef class="high" > H </mat-header-cell>
+      <mat-cell *matCellDef="let input" [class.high]="input.h"> {{input.h}} </mat-cell>
     </ng-container>
 
     
     <ng-container matColumnDef="X">
-      <mat-header-cell *matHeaderCellDef > X </mat-header-cell>
-      <mat-cell *matCellDef="let input"> {{input.x}} </mat-cell>
+      <mat-header-cell *matHeaderCellDef class="high" > X </mat-header-cell>
+      <mat-cell *matCellDef="let input" [class.high]="input.x"> {{input.x}} </mat-cell>
     </ng-container>
   
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>

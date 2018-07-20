@@ -21,7 +21,7 @@ export class Gate {
   private _isClocked: boolean;
   private _truthTable = [];
   private _maxInputs = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L'];
-  private _gateList = ['AND', 'OR', 'NAND', 'NOR', 'XOR', 'XNOR'];
+  private _gateList = ['AND', 'OR', 'NAND', 'NOR', 'XOR', 'XNOR', 'NOT'];
   private _inputCount = 0;
   constructor() { }
 
@@ -115,6 +115,9 @@ export class Gate {
           break;
         case 'XNOR': // values should total to be either 0 or the length of the inputs array
           result = inputSum === 0 || inputSum === input.length;
+          break;
+        case 'NOT':
+          result = !inputSum;
           break;
         default:
           result = false;

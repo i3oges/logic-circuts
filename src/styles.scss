@@ -27,5 +27,11 @@ $candy-app-theme: mat-dark-theme(
 // that you are using.
 @include angular-material-theme($candy-app-theme);
 mat-card {
-  margin: 10px;
+  margin: 8px;
+}
+.low {
+  text-decoration: overline;
+}
+.high {
+  color: rgb(74, 205, 248);
 }

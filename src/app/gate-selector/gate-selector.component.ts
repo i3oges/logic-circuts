@@ -1,5 +1,5 @@
-import { Component, OnInit, OnChanges } from '@angular/core';
-import { Gate } from '../gate';
+import { Component, OnInit, Output } from '@angular/core';
+import { EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-gate-selector',
@@ -7,11 +7,11 @@ import { Gate } from '../gate';
   styleUrls: ['./gate-selector.component.scss']
 })
 export class GateSelectorComponent implements OnInit {
-  gate = new Gate();
+  @Output() gateSelect = new EventEmitter();
   selectedGate: string;
-  inputs = 2;
-  gateList = this.gate.getGateList();
-  newGate;
+  @Output() newInputs = new EventEmitter();
+  gateList = ['AND', 'OR', 'NAND', 'NOR', 'XOR', 'XNOR', 'NOT'];
+
   constructor() { }
 
   ngOnInit() { }
@@ -22,9 +22,7 @@ export class GateSelectorComponent implements OnInit {
    * @param inputs number - number of inputs
    */
   updateGate(type: string) {
-    this.gate = new Gate();
-    this.gate.setGateType(type);
-    this.gate.setInputCount(this.inputs);
+    this.gateSelect.emit(type);
   }
 
   /**
@@ -32,10 +30,6 @@ export class GateSelectorComponent implements OnInit {
    * @param newInputs number - number to add to the current inputs(1 or -1)
    */
   updateInputs(newInputs: number = 0) {
-    this.inputs += newInputs;
-    if (this.inputs < 2) {
-      this.inputs = 2;
-    }
-    this.updateGate(this.gate.getGateType());
+    this.newInputs.emit(`${newInputs}`);
   }
 }
